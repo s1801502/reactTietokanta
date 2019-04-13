@@ -85,7 +85,8 @@ const Print = () => {
 const Welcome = () => {
     return (
         <div className="success">
-            <h1>Welcome!</h1>          
+            <h1>Welcome!</h1>  
+            <h2>You signed in successfully.</h2>        
         </div>
     );
 }
@@ -106,6 +107,7 @@ const Menu = ({setConnected}) => {
                 <Route path="/query" render={() => <Query queryPressed={queryPressed} setQueryPressed={setQueryPressed} />} exact={true} />
                 <Route path="/connect" component={Welcome} />
                 <Route path="/print" component={Print} />
+                <Route path="/" component={Welcome} />
             </Switch>
         </div>
         </BrowserRouter>
