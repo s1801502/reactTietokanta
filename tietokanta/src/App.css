@@ -16,12 +16,22 @@ th, td {
 
 }
 
+.table {
+  width: 20%;
+  
+}
+
 .database_links {
   font-size: 1.4em;
+  font-family: 'Bangers', cursive;
+  color: red;
+  line-height: 150%;
+  text-align: left;
+  word-spacing: 1cm;
 }
 
 .database_links:hover {
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -63,6 +73,7 @@ th, td {
 .result {
   margin-top: 30px;
   font: 0.7em "Courier New", Courier, monospace;
+  
 }
 
 .resultLarger {

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 
-const Form = ({ setConnected }) => {
+const Form = ({ setConnected, setDb }) => {
 
     const [error, setError] = useState('');
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,6 +21,9 @@ const Form = ({ setConnected }) => {
             password: '',
             database: e.target.database.value ? e.target.database.value : ''
         };
+
+
+        setDb(data.database);
 
         
 

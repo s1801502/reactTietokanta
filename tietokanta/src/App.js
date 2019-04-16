@@ -6,13 +6,13 @@ import './App.css';
 
 const App = () => {
   const [ connected, setConnected ] = useState(false);
-  
+  const [ db, setDb ] = useState('');
   
 
   return (
     <div className="body">
       <h1 className="w3-text-black w3-animate-fading header">Database App</h1>
-      {!connected ? <Form setConnected={setConnected} /> : <Menu setConnected={setConnected}/>}
+      {!connected ? <Form setConnected={setConnected} setDb={setDb} /> : <Menu setConnected={setConnected} db={db} setDb={setDb} />}
       
     </div>
   );

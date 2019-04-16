@@ -82,12 +82,13 @@ const PrintTables = () => {
     );
 };
 
-const PrintDatabases = (e) => {
+const PrintDatabases = ({db, setDb}) => {
 
     const [printData, setPrintData] = useState([]);
-
+    
     const onClickHandler = async (e) => {
-        const database = e.target.getAttribute('name');
+        
+        setDb(e.target.getAttribute('name'));
         await fetch('http://localhost:3001/toDatabase',
             {
                 headers: {
@@ -96,7 +97,7 @@ const PrintDatabases = (e) => {
                 },
 
                 method: 'POST',
-                body: JSON.stringify({ database })
+                body: JSON.stringify({ database: e.target.getAttribute('name') })
             }
         ).catch(err => {
             console.log(err);
@@ -119,13 +120,14 @@ const PrintDatabases = (e) => {
 
     let arr = [];
     for (let item of printData) {
+        
         arr.push(<tr key={Math.random()}><td className="w3-center">
-        <div name={item['Database']} onClick={onClickHandler} className="database_links">{item['Database']}</div></td></tr>);
+        <div name={item['Database']} onClick={onClickHandler} className="database_links">{item['Database'] === db ? `${item['Database']} \u2713`: item['Database']}</div></td></tr>);
     }
 
     return (
         <div className="result">
-            <table align="center">
+            <table align="center" className="table">
                 <thead>
                     <tr><th><h1 className="header">Databases:</h1></th></tr>
                 </thead>
@@ -152,7 +154,7 @@ const Welcome = () => {
     );
 }
 
-const Menu = ({ setConnected }) => {
+const Menu = ({ setConnected, db, setDb }) => {
 
     const [queryPressed, setQueryPressed] = useState(false);
 
@@ -168,7 +170,7 @@ const Menu = ({ setConnected }) => {
                     <Route path="/query" render={() => <Query queryPressed={queryPressed} setQueryPressed={setQueryPressed} />} exact={true} />
                     <Route path="/connect" component={Welcome} />
                     <Route path="/print" component={PrintTables} />
-                    <Route path="/databases" component={PrintDatabases} />
+                    <Route path="/databases" render={() => <PrintDatabases db={db} setDb={setDb} />} />
                     <Route path="/" component={Welcome} />
                 </Switch>
             </div>
