@@ -82,9 +82,26 @@ const PrintTables = () => {
     );
 };
 
-const PrintDatabases = () => {
+const PrintDatabases = (e) => {
 
     const [printData, setPrintData] = useState([]);
+
+    const onClickHandler = async (e) => {
+        const database = e.target.getAttribute('name');
+        await fetch('http://localhost:3001/toDatabase',
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+
+                method: 'POST',
+                body: JSON.stringify({ database })
+            }
+        ).catch(err => {
+            console.log(err);
+        });
+    }
 
     useEffect(() => {
 
@@ -102,23 +119,26 @@ const PrintDatabases = () => {
 
     let arr = [];
     for (let item of printData) {
-        arr.push(<p className="w3-center" key={Math.random()}>{item['Database']}</p>);
+        arr.push(<tr key={Math.random()}><td className="w3-center">
+        <div name={item['Database']} onClick={onClickHandler} className="database_links">{item['Database']}</div></td></tr>);
     }
 
     return (
         <div className="result">
             <table align="center">
                 <thead>
-                <tr><th><h1 className="header">Databases:</h1></th></tr>
+                    <tr><th><h1 className="header">Databases:</h1></th></tr>
                 </thead>
-                
+
                 <tbody>
+                    
                     <tr><td><p></p></td></tr>
                     {arr}
+                    
                 </tbody>
-                
+
             </table>
-            
+
         </div>
     );
 };

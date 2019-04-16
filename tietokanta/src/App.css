@@ -16,6 +16,15 @@ th, td {
 
 }
 
+.database_links {
+  font-size: 1.4em;
+}
+
+.database_links:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 
 .navlink {
   padding: 20px;

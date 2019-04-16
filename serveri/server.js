@@ -59,6 +59,16 @@ app.get('/printDatabases', async (req, res) => {
     res.json(await makeQuery(pool, 'SHOW DATABASES'));
 });
 
+app.post('/toDatabase', async (req, res) => {
+   
+    userData.database = req.body.database;
+    
+    pool = await createConnection(userData.host, userData.user, userData.password, userData.database);
+    // arr = await makeQuery(pool, `SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '${database}'`);
+
+    res.sendStatus(204);
+});
+
 app.listen(port, () => {
     console.log('serveri palveluksessanne');
 });
