@@ -11,7 +11,7 @@ const Header = ({handleOnClick, handleConnected}) => {
             <NavLink onClick={handleConnected} to="/connect" className="w3-padding">Reconnect</NavLink>
             <NavLink onClick={handleOnClick} to="/query" activeStyle={{color: "black"}} className="w3-padding">Make a query or manipulate databases and tables</NavLink>        
             <NavLink to="/print" activeStyle={{color: "black"}} className="w3-padding">Print the content of selected database</NavLink>
-            
+            <NavLink to="/databases" activeStyle={{color: "black"}} className="w3-padding">List of databases</NavLink>
         </div>
     );
 };

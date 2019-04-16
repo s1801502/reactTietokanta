@@ -29,14 +29,16 @@ const printAll = async (pool, database) => {
 
     conn = await pool.getConnection();
     
-    rows = await conn.query(`SELECT table_name FROM information_schema.tables WHERE table_type = 'base table' AND table_schema='${database}'`);
+    rows = await conn.query(`SELECT table_name FROM information_schema.tables 
+      WHERE table_type = 'base table' AND table_schema='${database}'`);
     
     for (row of rows) {
       tableNames.push(row);
       
     }
     
-    rows = await conn.query(`Select table_name, Column_name from information_schema.columns where table_schema='${database}'`);
+    rows = await conn.query(`Select table_name, Column_name from information_schema.columns 
+      where table_schema='${database}'`);
 
     for (row of rows) {
       

@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 
 app.post('/form-data-url', async (req, res) => {
     const { host, user, password, database } = req.body;
+    let arr = [];
 
     userData = {
         host,
@@ -29,8 +30,12 @@ app.post('/form-data-url', async (req, res) => {
     
     
     pool = await createConnection(userData.host, userData.user, userData.password, userData.database);
-    const arr = await makeQuery(pool, `SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '${database}'`);
-    
+    if (database)
+        arr = await makeQuery(pool, `SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '${database}'`);
+    else {
+        arr = await makeQuery(pool, 'SHOW DATABASES');
+    }
+
     res.json(arr);
     
 });
@@ -47,9 +52,11 @@ app.post('/query', async (req, res) => {
 });
 
 app.get('/printAll', async (req, res) => {
-    
     res.json(await printAll(pool, userData.database));
+});
 
+app.get('/printDatabases', async (req, res) => {
+    res.json(await makeQuery(pool, 'SHOW DATABASES'));
 });
 
 app.listen(port, () => {

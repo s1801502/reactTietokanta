@@ -18,7 +18,7 @@ const Form = ({ setConnected }) => {
             host: 'localhost',
             user: 'root',
             password: '',
-            database: e.target.database.value
+            database: e.target.database.value ? e.target.database.value : ''
         };
 
         
@@ -37,11 +37,13 @@ const Form = ({ setConnected }) => {
             .then(status => status.json())
             .then(response => {
 
-                if (response['0'].SCHEMA_NAME === data.database)
+                if (response[0] !== -1)
                     setConnected(true);
 
                 else
                     setError(response[1].code);
+
+                    
 
             }).catch(err => {
                 console.log(err);
