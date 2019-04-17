@@ -56,11 +56,11 @@ const Form = ({ setConnected, setDb }) => {
                 <table className="w3-card-4 form w3-text-red">
                     <tbody>
                         <tr><td className="formItem"><label htmlFor="host">Host:</label></td>
-                            <td className="formItem"><input name="host" className="w3-card-4" /></td></tr>
+                            <td className="formItem"><input name="host" className="w3-card-4" required /></td></tr>
 
 
                         <tr><td className="formItem"><label htmlFor="user">User:</label></td>
-                            <td className="formItem"><input name="user" className="w3-card-4" /></td>
+                            <td className="formItem"><input name="user" className="w3-card-4" required /></td>
                         </tr>
 
 
