@@ -8,20 +8,14 @@ const Form = ({ setConnected, setDb }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const data = {
-        //     host: e.target.host.value,
-        //     user: e.target.user.value,
-        //     password: e.target.password.value,
-        //     database: e.target.database.value
-        // };
-
         const data = {
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: e.target.database.value ? e.target.database.value : ''
+            host: e.target.host.value,
+            user: e.target.user.value,
+            password: e.target.password.value,
+            database: e.target.database.value
         };
 
+        
 
         setDb(data.database);
 

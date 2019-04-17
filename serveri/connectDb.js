@@ -6,6 +6,7 @@ const createConnection = async (host, user, password, database) => {
 
 
   const pool = await mariadb.createPool({
+    connectionLimit : 10,
     host,
     user,
     password,
@@ -66,7 +67,7 @@ const printAll = async (pool, database) => {
   } finally {
     
     if (conn)
-      conn.end();
+      conn.release();
       
       returnObj = printTables(tableNames, columnNames);
       returnObj.body = arr;
@@ -102,7 +103,7 @@ const makeQuery = async (pool, string) => {
   } finally {
 
     if (conn)
-      await conn.end();
+      await conn.release();
 
     return arr;
   }
